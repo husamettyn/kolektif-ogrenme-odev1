@@ -1,0 +1,28 @@
+Kolektif Öğrenme 2025/1
+Ödev No:1
+Ödev Konusu: ADAM alternatifleri
+Yapılacaklar:
+Adam algoritması için 2 algoritmik değişiklik (hiper-parametre değişimi
+değil) önerin.
+Her değişiklik için:
+Denemeden önce başarısını tahmin edin. Tahmininizin sebebini
+açıklayın.
+Deneyin.
+Tahmininizle gerçekleşeni karşılaştırıp, yorumlayın.
+Bu deneyden ne öğrendiniz açıklayın.
+Denemeleri nasıl yapacağınız, başarıyı nasıl ölçeceğiniz sizin karar
+vermeniz gereken ödev bileşenleridir ve notunuzu etkileyecektir.
+Sonuçlarınızın anlaşılabilirliğini arttırmak için tablo grafik şekil vb.
+kullanmanız önerilir.
+Notlandırma: Sınıfta sunum yapmayanlar en fazla 30/100 not alabilirler.
+Ödevin Son Teslim Tarihi: 11 Kasım 2025 saat 08:59
+Ödevin Teslim Şekli: online.yildiz.edu.tr
+Bu ödevde en çok 2 kişilik gruplar halinde çalışabilirsiniz.
+Grup çalışmalarında, sadece 1 kişinin ödevi yüklemesi yeterlidir.
+Grup çalışmalarında, 2 kişinin isimleri teslim edilen raporun ilk
+sayfasında yer almalıdır.
+11 Kasım’daki derste ödev, raporunuz üzerinden sunulacaktır.
+Ödevde Teslim Edilecekler:
+1-Açıklama içeren kodlarınız (değişkenlerin ne için kullanıldıkları,
+algoritmanın adımları)
+2-pdf formatında ödev raporu

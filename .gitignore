@@ -1,0 +1,37 @@
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env/
+
+# IDE/editor
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project outputs
+outputs/
+comp/
+!comp/
+!comp/example/
+!comp/example/**/*.png
+!comp/example/**/*.npy
+
+# Generated data/images
+*.npy
+*.png
+
+# Notebooks
+.ipynb_checkpoints/
+
