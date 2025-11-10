@@ -1,6 +1,19 @@
 import numpy as np
 from dataclasses import dataclass
 
+"""
+Adamvariant2: Gradient Clipping + Consistency Check
+
+Bu varyant, gradyanlara çok güvenmemeyi ve gürültülü gradyanları filtrelemeyi hedefler.
+
+Özellikler:
+1. Gradient Clipping: Gradyan normu max_grad_norm'dan büyükse kırpılır
+2. Consistency Check: Mevcut gradyan ile momentum (önceki gradyanların ortalaması) 
+   arasındaki uyumu kontrol eder. Eğer uyum düşükse (cosine similarity < threshold),
+   gradyan gürültülü olabilir ve daha az güvenilir.
+3. Trust Factor: Tutarsız gradyanlarda, gradyana ne kadar güvenileceğini belirler.
+
+"""
 
 @dataclass
 class AdamVariant2Config:
@@ -67,45 +80,5 @@ class AdamVariant2:
         return x - final_update
 
 
-"""
-Adamvariant2: Gradient Clipping + Consistency Check
 
-Bu varyant, gradyanlara çok güvenmemeyi ve gürültülü gradyanları filtrelemeyi hedefler.
-
-Özellikler:
-1. Gradient Clipping: Gradyan normu max_grad_norm'dan büyükse kırpılır
-2. Consistency Check: Mevcut gradyan ile momentum (önceki gradyanların ortalaması) 
-   arasındaki uyumu kontrol eder. Eğer uyum düşükse (cosine similarity < threshold),
-   gradyan gürültülü olabilir ve daha az güvenilir.
-3. Trust Factor: Tutarsız gradyanlarda, gradyana ne kadar güvenileceğini belirler.
-
-Mantık:
-- Tutarlı gradyanlar (momentum ile uyumlu): Gradient'e güven, normal adım at
-- Tutarsız gradyanlar (momentum ile uyumsuz): Gradient'i azalt, momentum'a daha fazla güven
-- Büyük gradyanlar: Clipping ile sınırla, aşırı adımları önle
-
-Hangi senaryoda nasil adim atilmali:
-
-"1. Büyük Gradyan, Düşük Gürültü","Hizli ve Emin" -> BÜYÜK ADIM
-   - Gradyan büyük ama tutarlı: Clipping yapılabilir ama momentum ile uyumlu, güvenilir adım
-
-"2. Küçük Gradyan, Düşük Gürültü","Yavaş ve Emin" -> KÜÇÜK ADIM
-   - Gradyan küçük ve tutarlı: Normal Adam gibi davranır, küçük adımlar
-
-"3. Büyük Gradyan, Yüksek Gürültü","Hizli ve Kararsiz" -> KÜÇÜK ADIM
-   - Gradyan büyük ama tutarsız: Clipping + consistency check ile gradyan azaltılır,
-     büyük yanlış adımlar önlenir
-
-"4. Küçük Gradyan, Yüksek Gürültü","Yavaş ve Kararsiz" -> ÇOK KÜÇÜK ADIM
-   - Gradyan küçük ve tutarsız: Consistency check ile gradyan çok azaltılır,
-     momentum'a daha fazla güvenilir, çok küçük adımlar
-
-Senaryo,Adamvariant2 Davranişi
-"1. Büyük G, Düşük N", -> İYİ. Clipping büyük gradyanları sınırlar ama tutarlıysa güvenilir adım atar.
-"2. Küçük G, Düşük N", -> İYİ. Tutarlı gradyanlar, normal Adam gibi davranır.
-"3. Büyük G, Yüksek N", -> İYİ. Clipping + consistency check ile gürültülü büyük gradyanlar filtrelenir.
-"4. Küçük G, Yüksek Gürültü", -> İYİ. Consistency check ile gürültülü küçük gradyanlar azaltılır,
-    yerel minimumlara sıkışma riski azalır, momentum sayesinde daha iyi yönlendirme sağlanır.
-
-"""
 

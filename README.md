@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 ---
 
-## Dizin Yapısı
+## !!!! Dizin Yapısı !!!!
 
 - `optim/`: `adam.py`, `adam_variant1.py`, `adam_variant2.py`, `sgd.py`, `adagrad.py`
 - `objectives/`: `rosenbrock.py`, `himmelblau.py`, `rastrigin.py`, `sphere.py`, `registry.py`
