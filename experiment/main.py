@@ -26,7 +26,13 @@ def save_numpy_and_config(outdir: Path, xs: np.ndarray, fs: np.ndarray, config: 
 def compose_grid(image_paths: list[list[Path]], save_path: Path, titles: list[list[str]] | None = None, figsize=(12, 2.4)) -> None:
     rows = len(image_paths)
     cols = len(image_paths[0]) if rows > 0 else 0
-    fig, axes = plt.subplots(rows, cols, figsize=(figsize[0], figsize[1] * rows))
+    
+    # Images are square (1:1), so for 2 columns: width = 2 * row_height
+    row_height = figsize[1]
+    fig_width = cols * row_height  # 2 columns = 2:1, 3 columns = 3:1, etc.
+    fig_height = row_height * rows
+    
+    fig, axes = plt.subplots(rows, cols, figsize=(fig_width, fig_height))
     if rows == 1 and cols == 1:
         axes = [[axes]]
     elif rows == 1:
@@ -40,12 +46,22 @@ def compose_grid(image_paths: list[list[Path]], save_path: Path, titles: list[li
             img = plt.imread(str(image_paths[i][j]))
             ax.imshow(img)
             ax.axis("off")
+            ax.set_aspect('equal')  # Preserve square aspect ratio
+            ax.margins(0)
             if titles is not None and i < len(titles) and j < len(titles[i]):
-                ax.set_title(titles[i][j], fontsize=9)
+                ax.set_title(titles[i][j], fontsize=9, pad=2)
 
     ensure_dir(save_path.parent)
-    fig.tight_layout()
-    fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    top_margin = 0.92 if titles is not None else 1.0
+    fig.subplots_adjust(
+        wspace=0.0,
+        hspace=0.1,
+        left=0.0,
+        right=1.0,
+        top=top_margin,
+        bottom=0.0
+    )
+    fig.savefig(save_path, dpi=300, bbox_inches="tight", pad_inches=0.0)
     plt.close(fig)
 
 
@@ -65,9 +81,9 @@ def main():
 
     # Defaults per algo
     lr_default = {
-        "adam": 0.005,
-        "adamv1": 0.005,
-        "adamv2": 0.005,
+        "adam": 0.01,
+        "adamv1": 0.01,
+        "adamv2": 0.01,
         "sgd": 0.01,
         "adagrad": 0.1,
     }
@@ -83,6 +99,7 @@ def main():
 
     rng = np.random.default_rng(args.seed)
 
+    # Main optimization loop
     for obj_name in args.objectives:
         obj_fn, obj_grad, bounds, start_default, global_mins = get_objective(obj_name)
         if args.random_start:

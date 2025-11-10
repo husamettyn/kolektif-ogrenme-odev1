@@ -92,7 +92,7 @@ def run(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run selected optimizer on selected objective function")
-    parser.add_argument("--algo", type=str, default="adam", choices=["adam", "adamv1", "adamv2", "sgd", "adagrad"], help="Optimizer to run")
+    parser.add_argument("--algo", type=str, default="adam", choices=["adam", "adamv1", "adamv2", "adamv3", "sgd", "adagrad"], help="Optimizer to run")
     parser.add_argument("--start", type=float, nargs=2, default=[-1.5, 2.0], help="Initial point x0 y0")
     parser.add_argument("--lr", type=float, default=0.005, help="Learning rate")
     parser.add_argument("--beta1", type=float, default=0.9, help="beta1")

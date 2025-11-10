@@ -7,6 +7,22 @@ from objectives.rosenbrock import rosenbrock, rosenbrock_grad
 from objectives.sphere import sphere, sphere_grad
 from objectives.himmelblau import himmelblau, himmelblau_grad
 from objectives.rastrigin import rastrigin, rastrigin_grad
+from objectives.large_grad_low_noise import (
+    large_grad_low_noise,
+    large_grad_low_noise_grad,
+)
+from objectives.small_grad_low_noise import (
+    small_grad_low_noise,
+    small_grad_low_noise_grad,
+)
+from objectives.large_grad_high_noise import (
+    large_grad_high_noise,
+    large_grad_high_noise_grad,
+)
+from objectives.small_grad_high_noise import (
+    small_grad_high_noise,
+    small_grad_high_noise_grad,
+)
 
 
 ObjectiveFn = Callable[[np.ndarray], float]
@@ -45,6 +61,34 @@ OBJECTIVES: Dict[str, dict] = {
         "grad": rastrigin_grad,
         "bounds": ((-5.12, 5.12), (-5.12, 5.12)),
         "start": [3.5, -3.5],
+        "global_mins": [[0.0, 0.0]],
+    },
+    "large_grad_low_noise": {
+        "fn": large_grad_low_noise,
+        "grad": large_grad_low_noise_grad,
+        "bounds": ((-2.0, 2.0), (-2.0, 2.0)),
+        "start": [1.5, -1.5],
+        "global_mins": [[0.0, 0.0]],
+    },
+    "small_grad_low_noise": {
+        "fn": small_grad_low_noise,
+        "grad": small_grad_low_noise_grad,
+        "bounds": ((-2.0, 2.0), (-2.0, 2.0)),
+        "start": [1.5, -1.5],
+        "global_mins": [[0.0, 0.0]],
+    },
+    "large_grad_high_noise": {
+        "fn": large_grad_high_noise,
+        "grad": large_grad_high_noise_grad,
+        "bounds": ((-2.0, 2.0), (-2.0, 2.0)),
+        "start": [1.5, -1.5],
+        "global_mins": [[0.0, 0.0]],
+    },
+    "small_grad_high_noise": {
+        "fn": small_grad_high_noise,
+        "grad": small_grad_high_noise_grad,
+        "bounds": ((-2.0, 2.0), (-2.0, 2.0)),
+        "start": [1.5, -1.5],
         "global_mins": [[0.0, 0.0]],
     },
 }

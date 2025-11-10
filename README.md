@@ -85,7 +85,7 @@ Tüm objective ve tüm optimizer’larla tam koşu örneği:
 
 ```bash
 python -m experiment.main \
-  --objectives rosenbrock himmelblau rastrigin sphere \
+  --objectives rosenbrock himmelblau sphere \
   --algos adam adamv1 adamv2 sgd adagrad \
   --iters 1000 \
   --outroot outputs \
